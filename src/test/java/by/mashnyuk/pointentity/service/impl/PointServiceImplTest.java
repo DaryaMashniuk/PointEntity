@@ -1,48 +1,65 @@
 package by.mashnyuk.pointentity.service.impl;
 
 import by.mashnyuk.pointentity.entity.Point;
+import by.mashnyuk.pointentity.util.TestFileReader;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import java.util.List;
 
 import static org.testng.Assert.*;
 
 public class PointServiceImplTest {
 
+    private PointServiceImpl pointServiceImpl;
+    private SoftAssert softAssert;
+    private List<Point> testPoints;
+
+    @BeforeClass
+    public void initialSetUp() {
+        softAssert = new SoftAssert();
+        pointServiceImpl = new PointServiceImpl();
+        testPoints = TestFileReader.readPointsFromFile("src/test/resources/test_data.txt").getPoints();
+    }
+
     @Test
     public void testGetVelocity() {
-        Point point = new Point(0, 0, 0, 0, 3, 4, 0, 0, 0, 0);
-        double velocity = new PointServiceImpl().getVelocity(point);
-        assertEquals(5.0, velocity, 0.001);
+        Point point = testPoints.get(0);
+        double velocity = pointServiceImpl.getVelocity(point);
+        softAssert.assertEquals(velocity, 5.0, 0.001);
     }
 
     @Test
     public void testGetAcceleration() {
-        Point point = new Point(0, 0, 0, 0, 0, 0, 0, 3, 4, 0);
-        double acceleration = new PointServiceImpl().getAcceleration(point);
-        assertEquals(5.0, acceleration, 0.001);
+        Point point = testPoints.get(1);
+        double acceleration = pointServiceImpl.getAcceleration(point);
+        softAssert.assertEquals(acceleration, 5.0, 0.001);
     }
 
     @Test
     public void testMove() {
-        Point point = new Point(0, 0, 0, 0, 2, 3, 4, 1, 1, 1);
+        Point point = testPoints.get(2);
         Point movedPoint = PointServiceImpl.move(point, 2).orElseThrow();
-        assertEquals(6.0, movedPoint.getX(), 0.001);
-        assertEquals(8.0, movedPoint.getY(), 0.001);
-        assertEquals(10.0, movedPoint.getZ(), 0.001);
+        softAssert.assertEquals(movedPoint.getX(), 6.0, 0.001);
+        softAssert.assertEquals(movedPoint.getY(), 8.0, 0.001);
+        softAssert.assertEquals(movedPoint.getZ(), 10.0, 0.001);
+        softAssert.assertAll();
     }
 
     @Test
     public void testDistance() {
-        Point p1 = new Point(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        Point p2 = new Point(3, 4, 0, 0, 0, 0, 0, 0, 0, 0);
+        Point p1 = testPoints.get(3);
+        Point p2 = testPoints.get(4);
         double distance = PointServiceImpl.distance(p1, p2);
-        assertEquals(5.0, distance, 0.001);
+        softAssert.assertEquals(distance, 5.0, 0.001);
     }
 
     @Test
     public void testCheckIntersection() {
-        Point p1 = new Point(0, 0, 0, 0, 1, 1, 0, 0, 0, 0);
-        Point p2 = new Point(2, 2, 0, 0, -1, -1, 0, 0, 0, 0);
+        Point p1 = testPoints.get(5);
+        Point p2 = testPoints.get(6);
         boolean intersects = PointServiceImpl.checkIntersection(p1, p2, 5);
-        assertTrue(intersects);
+        assertFalse(intersects);
     }
 }

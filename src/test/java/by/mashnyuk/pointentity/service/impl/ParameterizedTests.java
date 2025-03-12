@@ -1,8 +1,11 @@
 package by.mashnyuk.pointentity.service.impl;
 
+import by.mashnyuk.pointentity.creator.PointFactory;
 import by.mashnyuk.pointentity.entity.Point;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.Optional;
 
 import static org.testng.Assert.*;
 
@@ -19,8 +22,12 @@ public class ParameterizedTests {
 
     @Test(dataProvider = "velocityData")
     public void testGetVelocity(double x, double y, double z, double time, double vx, double vy, double vz, double expected) {
-        Point point = new Point(x, y, z, time, vx, vy, vz, 0, 0, 0);
-        double velocity = new PointServiceImpl().getVelocity(point);
-        assertEquals(expected, velocity, 0.001);
+        Optional<Point> pointOpt = PointFactory.create3DPoint(x, y, z, time, vx, vy, vz, 0, 0, 0);
+        if (pointOpt.isPresent()) {
+            double velocity = new PointServiceImpl().getVelocity(pointOpt.get());
+            assertEquals(expected, velocity, 0.001);
+        } else {
+            fail("Point creation failed.");
+        }
     }
 }

@@ -1,6 +1,5 @@
 package by.mashnyuk.pointentity.creator;
 
-import by.mashnyuk.pointentity.entity.Motion;
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.validator.impl.PointValidatorImpl;
 
