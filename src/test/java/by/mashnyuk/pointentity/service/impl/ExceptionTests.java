@@ -1,27 +1,26 @@
 package by.mashnyuk.pointentity.service.impl;
 
 import by.mashnyuk.pointentity.entity.Point;
-import by.mashnyuk.pointentity.util.TestFileReader;
+import by.mashnyuk.pointentity.entity.PointsStorage;
+import by.mashnyuk.pointentity.io.FileReader;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static org.testng.Assert.*;
 
 public class ExceptionTests {
 
-    private List<Point> testPoints;
+    private PointsStorage pointsStorage;
 
     @BeforeClass
     public void initialSetUp() {
-        testPoints = TestFileReader.readPointsFromFile("src/test/resources/exceptionsTest_data.txt").getPoints();
-        assertFalse(testPoints.isEmpty(), "The testPoints list should not be empty.");
+        pointsStorage = new PointServiceImpl().loadPoints("/exceptionsTest_data.txt");
+        assertFalse(pointsStorage.getPoints().isEmpty(), "The points storage should not be empty.");
     }
 
     @Test
     public void testMoveWithNegativeTime() {
-        Point point = testPoints.get(0);
+        Point point = pointsStorage.getPoints().get(0);
         assertTrue(PointServiceImpl.move(point, -1).isEmpty(), "Expected empty result for negative time.");
     }
 

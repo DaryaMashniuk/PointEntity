@@ -12,32 +12,28 @@ public class PointValidatorImpl implements PointValidator {
 
     @Override
     public boolean validate(Point point) {
-        if(point == null){
+        if (point == null) {
             return false;
         }
-        return  validateX(point.getX()) &&
-                validateY(point.getY()) &&
-                validateZ(point.getZ()) &&
-                validateTime(point.getTime());
-    }
-
-    @Override
-    public boolean validateX(double x) {
-        return true;
-    }
-
-    @Override
-    public boolean validateY(double y) {
-        return true;
-    }
-
-    @Override
-    public boolean validateZ(double z) {
-        return true;
+        return  validateTime(point.getTime()) &&
+                validateVelocity(point.getVx(), point.getVy(), point.getVz()) &&
+                validateAcceleration(point.getAx(), point.getAy(), point.getAz());
     }
 
     @Override
     public boolean validateTime(double time) {
         return time >= 0;
+    }
+
+    public boolean validateVelocity(double vx, double vy, double vz) {
+        return vx >= -100 && vx <= 100 &&
+                vy >= -100 && vy <= 100 &&
+                vz >= -100 && vz <= 100;
+    }
+
+    public boolean validateAcceleration(double ax, double ay, double az) {
+        return ax >= -50 && ax <= 50 &&
+                ay >= -50 && ay <= 50 &&
+                az >= -50 && az <= 50;
     }
 }

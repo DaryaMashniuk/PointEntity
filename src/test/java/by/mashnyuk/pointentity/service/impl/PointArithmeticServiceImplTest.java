@@ -2,14 +2,10 @@ package by.mashnyuk.pointentity.service.impl;
 
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
-import by.mashnyuk.pointentity.util.TestFileReader;
+import by.mashnyuk.pointentity.io.FileReader;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.util.List;
-
-import static org.testng.Assert.*;
 
 public class PointArithmeticServiceImplTest {
 
@@ -22,7 +18,8 @@ public class PointArithmeticServiceImplTest {
         arithmeticService = new PointArithmeticServiceImpl();
         softAssert = new SoftAssert();
 
-        pointsStorage = TestFileReader.readPointsFromFile("src/test/resources/arithmeticTest_data.txt");
+        PointServiceImpl pointService = new PointServiceImpl();
+        pointsStorage = pointService.loadPoints("/arithmeticTest_data.txt");
     }
 
     @Test
@@ -32,12 +29,12 @@ public class PointArithmeticServiceImplTest {
 
         Point result = arithmeticService.add(p1, p2);
 
-        softAssert.assertEquals(result.getX(), 3.0);
-        softAssert.assertEquals(result.getY(), 4.0);
-        softAssert.assertEquals(result.getZ(), 5.0);
-        softAssert.assertEquals(result.getVx(), 2.0);
-        softAssert.assertEquals(result.getVy(), 2.0);
-        softAssert.assertEquals(result.getVz(), 2.0);
+        softAssert.assertEquals(result.getX(), 3.0, "X coordinate addition failed");
+        softAssert.assertEquals(result.getY(), 4.0, "Y coordinate addition failed");
+        softAssert.assertEquals(result.getZ(), 5.0, "Z coordinate addition failed");
+        softAssert.assertEquals(result.getVx(), 2.0, "Vx addition failed");
+        softAssert.assertEquals(result.getVy(), 2.0, "Vy addition failed");
+        softAssert.assertEquals(result.getVz(), 2.0, "Vz addition failed");
         softAssert.assertAll();
     }
 
@@ -48,12 +45,12 @@ public class PointArithmeticServiceImplTest {
 
         Point result = arithmeticService.subtract(p1, p2);
 
-        softAssert.assertEquals(result.getX(), 1.0);
-        softAssert.assertEquals(result.getY(), 2.0);
-        softAssert.assertEquals(result.getZ(), 3.0);
-        softAssert.assertEquals(result.getVx(), 0.0);
-        softAssert.assertEquals(result.getVy(), 0.0);
-        softAssert.assertEquals(result.getVz(), 0.0);
+        softAssert.assertEquals(result.getX(), 1.0, "X coordinate subtraction failed");
+        softAssert.assertEquals(result.getY(), 2.0, "Y coordinate subtraction failed");
+        softAssert.assertEquals(result.getZ(), 3.0, "Z coordinate subtraction failed");
+        softAssert.assertEquals(result.getVx(), 0.0, "Vx subtraction failed");
+        softAssert.assertEquals(result.getVy(), 0.0, "Vy subtraction failed");
+        softAssert.assertEquals(result.getVz(), 0.0, "Vz subtraction failed");
         softAssert.assertAll();
     }
 
@@ -64,12 +61,12 @@ public class PointArithmeticServiceImplTest {
 
         Point result = arithmeticService.multiplyByScalar(p, scalar);
 
-        softAssert.assertEquals(result.getX(), 4.0);
-        softAssert.assertEquals(result.getY(), 6.0);
-        softAssert.assertEquals(result.getZ(), 8.0);
-        softAssert.assertEquals(result.getVx(), 2.0);
-        softAssert.assertEquals(result.getVy(), 2.0);
-        softAssert.assertEquals(result.getVz(), 2.0);
+        softAssert.assertEquals(result.getX(), 4.0, "X coordinate multiplication failed");
+        softAssert.assertEquals(result.getY(), 6.0, "Y coordinate multiplication failed");
+        softAssert.assertEquals(result.getZ(), 8.0, "Z coordinate multiplication failed");
+        softAssert.assertEquals(result.getVx(), 2.0, "Vx multiplication failed");
+        softAssert.assertEquals(result.getVy(), 2.0, "Vy multiplication failed");
+        softAssert.assertEquals(result.getVz(), 2.0, "Vz multiplication failed");
         softAssert.assertAll();
     }
 
@@ -86,12 +83,12 @@ public class PointArithmeticServiceImplTest {
 
         Point result = arithmeticService.divideByScalar(p, scalar);
 
-        softAssert.assertEquals(result.getX(), 1.0);
-        softAssert.assertEquals(result.getY(), 1.5);
-        softAssert.assertEquals(result.getZ(), 2.0);
-        softAssert.assertEquals(result.getVx(), 0.5);
-        softAssert.assertEquals(result.getVy(), 0.5);
-        softAssert.assertEquals(result.getVz(), 0.5);
+        softAssert.assertEquals(result.getX(), 1.0, "X coordinate division failed");
+        softAssert.assertEquals(result.getY(), 1.5, "Y coordinate division failed");
+        softAssert.assertEquals(result.getZ(), 2.0, "Z coordinate division failed");
+        softAssert.assertEquals(result.getVx(), 0.5, "Vx division failed");
+        softAssert.assertEquals(result.getVy(), 0.5, "Vy division failed");
+        softAssert.assertEquals(result.getVz(), 0.5, "Vz division failed");
         softAssert.assertAll();
     }
 }
