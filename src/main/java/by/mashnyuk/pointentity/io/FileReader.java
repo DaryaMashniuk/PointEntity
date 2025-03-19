@@ -1,5 +1,8 @@
 package by.mashnyuk.pointentity.io;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -7,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader {
+    private static final Logger logger = LogManager.getLogger();
 
     public List<String> readLinesFromClasspath(String filename) {
         List<String> lines = new ArrayList<>();
@@ -19,7 +23,7 @@ public class FileReader {
                         lines.add(line.trim());
                     }
                 } else {
-                    System.err.println("File not found: " + filename);
+                    logger.info("File not found: " + filename);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

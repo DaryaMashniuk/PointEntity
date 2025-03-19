@@ -31,12 +31,12 @@ public class FileParser {
 
     private Optional<Point> parseLine(String line) {
         String[] data = line.split(",");
-        if (data.length == 10) {  // 3D point
+        if (data.length == 10) {
             return create3DPoint(data);
-        } else if (data.length == 7) { // 2D point
+        } else if (data.length == 7) {
             return create2DPoint(data);
         }
-        return Optional.empty(); // Invalid format
+        return Optional.empty();
     }
 
     private Optional<Point> create3DPoint(String[] data) {
