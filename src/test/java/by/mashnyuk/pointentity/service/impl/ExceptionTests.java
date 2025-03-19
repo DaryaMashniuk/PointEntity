@@ -2,7 +2,6 @@ package by.mashnyuk.pointentity.service.impl;
 
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
-import by.mashnyuk.pointentity.io.FileReader;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -26,6 +25,6 @@ public class ExceptionTests {
 
     @Test(expectedExceptions = NullPointerException.class)
     public void testNullPoint() {
-        new PointServiceImpl().getVelocity(null);
+        new PointServiceImpl().calculateVelocity(null);
     }
 }

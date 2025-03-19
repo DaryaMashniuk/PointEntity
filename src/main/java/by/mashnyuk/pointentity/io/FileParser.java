@@ -3,7 +3,7 @@ package by.mashnyuk.pointentity.io;
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
 import by.mashnyuk.pointentity.validator.PointValidator;
-import by.mashnyuk.pointentity.creator.PointFactory;
+import by.mashnyuk.pointentity.creator.impl.PointFactoryImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +11,9 @@ import java.util.Optional;
 public class FileParser {
 
     private final PointValidator validator;
+
+    private static final int DIMENSION_3D = 10;
+    private static final int DIMENSION_2D = 7;
 
     public FileParser(PointValidator validator) {
         this.validator = validator;
@@ -31,9 +34,9 @@ public class FileParser {
 
     private Optional<Point> parseLine(String line) {
         String[] data = line.split(",");
-        if (data.length == 10) {
+        if (data.length == DIMENSION_3D) {
             return create3DPoint(data);
-        } else if (data.length == 7) {
+        } else if (data.length == DIMENSION_2D) {
             return create2DPoint(data);
         }
         return Optional.empty();
@@ -44,25 +47,25 @@ public class FileParser {
         double y = Double.parseDouble(data[1]);
         double z = Double.parseDouble(data[2]);
         double time = Double.parseDouble(data[3]);
-        double vx = Double.parseDouble(data[4]);
-        double vy = Double.parseDouble(data[5]);
-        double vz = Double.parseDouble(data[6]);
-        double ax = Double.parseDouble(data[7]);
-        double ay = Double.parseDouble(data[8]);
-        double az = Double.parseDouble(data[9]);
+        double velocityX = Double.parseDouble(data[4]);
+        double velocityY = Double.parseDouble(data[5]);
+        double velocityZ = Double.parseDouble(data[6]);
+        double accelerationX = Double.parseDouble(data[7]);
+        double accelerationY = Double.parseDouble(data[8]);
+        double accelerationZ = Double.parseDouble(data[9]);
 
-        return PointFactory.create3DPoint(x, y, z, time, vx, vy, vz, ax, ay, az);
+        return PointFactoryImpl.create3DPoint(x, y, z, time, velocityX, velocityY, velocityZ, accelerationX, accelerationY, accelerationZ);
     }
 
     private Optional<Point> create2DPoint(String[] data) {
         double x = Double.parseDouble(data[0]);
         double y = Double.parseDouble(data[1]);
         double time = Double.parseDouble(data[2]);
-        double vx = Double.parseDouble(data[3]);
-        double vy = Double.parseDouble(data[4]);
-        double ax = Double.parseDouble(data[5]);
-        double ay = Double.parseDouble(data[6]);
+        double velocityX = Double.parseDouble(data[3]);
+        double velocityY = Double.parseDouble(data[4]);
+        double accelerationX = Double.parseDouble(data[5]);
+        double accelerationY = Double.parseDouble(data[6]);
 
-        return PointFactory.create2DPoint(x, y, time, vx, vy, ax, ay);
+        return PointFactoryImpl.create2DPoint(x, y, time, velocityX, velocityY, accelerationX, accelerationY);
     }
 }

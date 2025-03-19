@@ -5,29 +5,29 @@ public class Point {
     private double y;
     private double z;
     private double time;
-    private double vx, vy, vz;  // Скорость
-    private double ax, ay, az;
+    private double velocityX, velocityY, velocityZ;  // Скорость
+    private double accelerationX, accelerationY, accelerationZ;
 
-    public Point(double x, double y, double z, double time, double vx, double vy, double vz, double ax, double ay, double az) {
+    public Point(double x, double y, double z, double time, double velocityX, double vy, double velocityZ, double accelerationX, double accelerationY, double accelerationZ) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.time = time;
-        this.vx = vx;
-        this.vy = vy;
-        this.vz = vz;
-        this.ax = ax;
-        this.ay = ay;
-        this.az = az;
+        this.velocityX = velocityX;
+        this.velocityY = vy;
+        this.velocityZ = velocityZ;
+        this.accelerationX = accelerationX;
+        this.accelerationY = accelerationY;
+        this.accelerationZ = accelerationZ;
     }
-    public Point(double x, double y, double time, double vx, double vy,double ax, double ay) {
+    public Point(double x, double y, double time, double velocityX, double vy, double accelerationX, double accelerationY) {
         this.x = x;
         this.y = y;
         this.time = time;
-        this.vx = vx;
-        this.vy = vy;
-        this.ax = ax;
-        this.ay = ay;
+        this.velocityX = velocityX;
+        this.velocityY = vy;
+        this.accelerationX = accelerationX;
+        this.accelerationY = accelerationY;
     }
 
     public double getX() {
@@ -62,52 +62,52 @@ public class Point {
         this.time = time;
     }
 
-    public double getVx() {
-        return vx;
+    public double getVelocityX() {
+        return velocityX;
     }
 
-    public double getVy() {
-        return vy;
+    public double getVelocityY() {
+        return velocityY;
     }
 
-    public double getVz() {
-        return vz;
+    public double getVelocityZ() {
+        return velocityZ;
     }
 
-    public double getAx() {
-        return ax;
+    public double getAccelerationX() {
+        return accelerationX;
     }
 
-    public double getAy() {
-        return ay;
+    public double getAccelerationY() {
+        return accelerationY;
     }
 
-    public double getAz() {
-        return az;
+    public double getAccelerationZ() {
+        return accelerationZ;
     }
 
-    public void setVx(double vx) {
-        this.vx = vx;
+    public void setVelocityX(double velocityX) {
+        this.velocityX = velocityX;
     }
 
-    public void setVy(double vy) {
-        this.vy = vy;
+    public void setVelocityY(double velocityY) {
+        this.velocityY = velocityY;
     }
 
-    public void setVz(double vz) {
-        this.vz = vz;
+    public void setVelocityZ(double velocityZ) {
+        this.velocityZ = velocityZ;
     }
 
-    public void setAx(double ax) {
-        this.ax = ax;
+    public void setAccelerationX(double accelerationX) {
+        this.accelerationX = accelerationX;
     }
 
-    public void setAy(double ay) {
-        this.ay = ay;
+    public void setAccelerationY(double accelerationY) {
+        this.accelerationY = accelerationY;
     }
 
-    public void setAz(double az) {
-        this.az = az;
+    public void setAccelerationZ(double accelerationZ) {
+        this.accelerationZ = accelerationZ;
     }
 
     @Override
@@ -115,8 +115,8 @@ public class Point {
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
         return x == point.x && y == point.y && z == point.z && time == point.time &&
-                vx == point.vx && vy == point.vy && vz == point.vz && ax == point.ax &&
-                ay == point.ay && az == point.az;
+                velocityX == point.velocityX && velocityY == point.velocityY && velocityZ == point.velocityZ && accelerationX == point.accelerationX &&
+                accelerationY == point.accelerationY && accelerationZ == point.accelerationZ;
     }
 
     @Override
@@ -126,12 +126,12 @@ public class Point {
         long longY = Double.doubleToLongBits(y);
         long longZ = Double.doubleToLongBits(z);
         long longTime = Double.doubleToLongBits(time);
-        long longVx = Double.doubleToLongBits(vx);
-        long longVy = Double.doubleToLongBits(vy);
-        long longVz = Double.doubleToLongBits(vz);
-        long longAx = Double.doubleToLongBits(ax);
-        long longAy = Double.doubleToLongBits(ay);
-        long longAz = Double.doubleToLongBits(az);
+        long longVx = Double.doubleToLongBits(velocityX);
+        long longVy = Double.doubleToLongBits(velocityY);
+        long longVz = Double.doubleToLongBits(velocityZ);
+        long longAx = Double.doubleToLongBits(accelerationX);
+        long longAy = Double.doubleToLongBits(accelerationY);
+        long longAz = Double.doubleToLongBits(accelerationZ);
         result = 31 * result + Long.hashCode(longX);
         result = 31 * result + Long.hashCode(longY);
         result = 31 * result + Long.hashCode(longZ);
@@ -152,12 +152,12 @@ public class Point {
         sb.append(", y=").append(y);
         sb.append(", z=").append(z);
         sb.append(", time=").append(time);
-        sb.append(", vx=").append(vx);
-        sb.append(", vy=").append(vy);
-        sb.append(", vz=").append(vz);
-        sb.append(", ax=").append(ax);
-        sb.append(", ay=").append(ay);
-        sb.append(", az=").append(az);
+        sb.append(", vx=").append(velocityX);
+        sb.append(", vy=").append(velocityY);
+        sb.append(", vz=").append(velocityZ);
+        sb.append(", ax=").append(accelerationX);
+        sb.append(", ay=").append(accelerationY);
+        sb.append(", az=").append(accelerationZ);
         sb.append('}');
         return sb.toString();
     }

@@ -2,12 +2,9 @@ package by.mashnyuk.pointentity.service.impl;
 
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
-import by.mashnyuk.pointentity.io.FileReader;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -26,16 +23,16 @@ public class PointServiceImplTest {
     }
 
     @Test
-    public void testGetVelocity() {
+    public void testCalculateVelocity() {
         Point point = pointsStorage.getPoints().get(0);
-        double velocity = pointServiceImpl.getVelocity(point);
+        double velocity = pointServiceImpl.calculateVelocity(point);
         softAssert.assertEquals(velocity, 5.0, 0.001);
     }
 
     @Test
-    public void testGetAcceleration() {
+    public void testCalculateAcceleration() {
         Point point = pointsStorage.getPoints().get(1);
-        double acceleration = pointServiceImpl.getAcceleration(point);
+        double acceleration = pointServiceImpl.calculateAcceleration(point);
         softAssert.assertEquals(acceleration, 5.0, 0.001);
     }
 

@@ -10,9 +10,9 @@ public class PointArithmeticServiceImpl implements PointArithmeticService {
                 p1.getY() + p2.getY(),
                 p1.getZ() + p2.getZ(),
                 Math.max(p1.getTime(), p2.getTime()),
-                p1.getVx() + p2.getVx(),
-                p1.getVy() + p2.getVy(),
-                p1.getVz() + p2.getVz(),
+                p1.getVelocityX() + p2.getVelocityX(),
+                p1.getVelocityY() + p2.getVelocityY(),
+                p1.getVelocityZ() + p2.getVelocityZ(),
                 0, 0, 0
         );
     }
@@ -23,9 +23,9 @@ public class PointArithmeticServiceImpl implements PointArithmeticService {
                 p1.getY() - p2.getY(),
                 p1.getZ() - p2.getZ(),
                 Math.max(p1.getTime(), p2.getTime()), // Assuming time is the max of both
-                p1.getVx() - p2.getVx(),
-                p1.getVy() - p2.getVy(),
-                p1.getVz() - p2.getVz(),
+                p1.getVelocityX() - p2.getVelocityX(),
+                p1.getVelocityY() - p2.getVelocityY(),
+                p1.getVelocityZ() - p2.getVelocityZ(),
                 0, 0, 0
         );
     }
@@ -36,12 +36,12 @@ public class PointArithmeticServiceImpl implements PointArithmeticService {
                 p.getY() * scalar,
                 p.getZ() * scalar,
                 p.getTime(),
-                p.getVx() * scalar,
-                p.getVy() * scalar,
-                p.getVz() * scalar,
-                p.getAx(),
-                p.getAy(),
-                p.getAz()
+                p.getVelocityX() * scalar,
+                p.getVelocityY() * scalar,
+                p.getVelocityZ() * scalar,
+                p.getAccelerationX(),
+                p.getAccelerationY(),
+                p.getAccelerationZ()
         );
     }
 
@@ -54,12 +54,12 @@ public class PointArithmeticServiceImpl implements PointArithmeticService {
                 p.getY() / scalar,
                 p.getZ() / scalar,
                 p.getTime(),
-                p.getVx() / scalar,
-                p.getVy() / scalar,
-                p.getVz() / scalar,
-                p.getAx(),
-                p.getAy(),
-                p.getAz()
+                p.getVelocityX() / scalar,
+                p.getVelocityY() / scalar,
+                p.getVelocityZ() / scalar,
+                p.getAccelerationX(),
+                p.getAccelerationY(),
+                p.getAccelerationZ()
         );
     }
 }
