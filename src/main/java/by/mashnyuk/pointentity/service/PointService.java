@@ -6,5 +6,4 @@ import by.mashnyuk.pointentity.entity.PointsStorage;
 public interface PointService {
     double calculateVelocity(Point point);
     double calculateAcceleration(Point point);
-    PointsStorage loadPoints(String filename);
 }

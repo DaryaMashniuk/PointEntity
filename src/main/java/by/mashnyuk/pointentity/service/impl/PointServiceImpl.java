@@ -3,7 +3,7 @@ package by.mashnyuk.pointentity.service.impl;
 import by.mashnyuk.pointentity.creator.impl.PointFactoryImpl;
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
-import by.mashnyuk.pointentity.io.FileParser;
+import by.mashnyuk.pointentity.io.LineParser;
 import by.mashnyuk.pointentity.io.CustomFileReader;
 import by.mashnyuk.pointentity.service.PointService;
 import by.mashnyuk.pointentity.validator.impl.PointValidatorImpl;
@@ -19,14 +19,6 @@ public class PointServiceImpl implements PointService {
     private static final double TIME_INCREMENT = 0.1;
     private static final double INTERSECTION_THRESHOLD = 0.01;
 
-    @Override
-    public PointsStorage loadPoints(String filename) {
-        CustomFileReader fileReader = new CustomFileReader();
-        PointValidatorImpl validator = new PointValidatorImpl();
-        FileParser parser = new FileParser(validator);
-        List<String> lines = fileReader.readLinesFromFile(filename);
-        return parser.parseLines(lines);
-    }
 
     @Override
     public double calculateVelocity(Point point) {
@@ -60,6 +52,7 @@ public class PointServiceImpl implements PointService {
 
         return PointFactoryImpl.create3DPoint(newX, newY, newZ, point.getTime() + deltaTime, newVx, newVy, newVz, point.getAccelerationX(), point.getAccelerationY(), point.getAccelerationZ());
     }
+
 
     public static boolean checkIntersection(Point p1, Point p2, double timeLimit) {
         for (double t = 0; t <= timeLimit; t += TIME_INCREMENT) {
