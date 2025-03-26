@@ -1,6 +1,7 @@
-package by.mashnyuk.pointentity;
+package by.mashnyuk.pointentity.main;
 
-import by.mashnyuk.pointentity.conroller.Facade;
+import by.mashnyuk.pointentity.exception.PointEntityException;
+import by.mashnyuk.pointentity.facade.Facade;
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
 import by.mashnyuk.pointentity.service.impl.PointArithmeticServiceImpl;
@@ -11,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 public class Main {
     private static final Logger logger = LogManager.getLogger();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PointEntityException {
         Facade facade = new Facade();
         PointsStorage storage = facade.loadPoints("src/main/resources/test_data.txt");
 

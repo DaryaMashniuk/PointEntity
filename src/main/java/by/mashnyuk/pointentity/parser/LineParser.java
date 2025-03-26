@@ -1,7 +1,8 @@
-package by.mashnyuk.pointentity.io;
+package by.mashnyuk.pointentity.parser;
 
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
+import by.mashnyuk.pointentity.exception.PointEntityException;
 import by.mashnyuk.pointentity.validator.PointValidator;
 import by.mashnyuk.pointentity.creator.impl.PointFactoryImpl;
 
@@ -19,16 +20,23 @@ public class LineParser {
         this.validator = validator;
     }
 
-    public PointsStorage parseLines(List<String> lines) {
+    public PointsStorage parseLines(List<String> lines) throws PointEntityException {
         PointsStorage points = new PointsStorage();
 
-        lines.stream()
-                .map(this::parseLine)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .filter(validator::validate)
-                .forEach(points::addPoint);
-
+        try {
+            lines.stream()
+                    .map(this::parseLine)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .filter(validator::validate)
+                    .forEach(points::add);
+        } catch (Exception e) {
+            throw new PointEntityException(
+                    PointEntityException.ErrorType.PARSING_ERROR,
+                    "Failed to parse lines: " + e.getMessage(),
+                    e
+            );
+        }
         return points;
     }
     private Optional<Point> parseLine(String line) {

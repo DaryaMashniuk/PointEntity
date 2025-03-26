@@ -2,15 +2,10 @@ package by.mashnyuk.pointentity.service.impl;
 
 import by.mashnyuk.pointentity.creator.impl.PointFactoryImpl;
 import by.mashnyuk.pointentity.entity.Point;
-import by.mashnyuk.pointentity.entity.PointsStorage;
-import by.mashnyuk.pointentity.io.LineParser;
-import by.mashnyuk.pointentity.io.CustomFileReader;
 import by.mashnyuk.pointentity.service.PointService;
-import by.mashnyuk.pointentity.validator.impl.PointValidatorImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
 import java.util.Optional;
 
 public class PointServiceImpl implements PointService {

@@ -1,5 +1,6 @@
 package by.mashnyuk.pointentity.service.impl;
 import by.mashnyuk.pointentity.entity.Point;
+import by.mashnyuk.pointentity.exception.PointEntityException;
 import by.mashnyuk.pointentity.service.PointArithmeticService;
 
 public class PointArithmeticServiceImpl implements PointArithmeticService {
@@ -22,7 +23,7 @@ public class PointArithmeticServiceImpl implements PointArithmeticService {
                 p1.getX() - p2.getX(),
                 p1.getY() - p2.getY(),
                 p1.getZ() - p2.getZ(),
-                Math.max(p1.getTime(), p2.getTime()), // Assuming time is the max of both
+                Math.max(p1.getTime(), p2.getTime()),
                 p1.getVelocityX() - p2.getVelocityX(),
                 p1.getVelocityY() - p2.getVelocityY(),
                 p1.getVelocityZ() - p2.getVelocityZ(),
@@ -45,9 +46,12 @@ public class PointArithmeticServiceImpl implements PointArithmeticService {
         );
     }
 
-    public Point divideByScalar(Point p, double scalar) {
+    public Point divideByScalar(Point p, double scalar) throws PointEntityException {
         if (scalar == 0) {
-            throw new IllegalArgumentException("Cannot divide by zero");
+            throw new PointEntityException(
+                    PointEntityException.ErrorType.DIVISION_BY_ZERO,
+                    "Cannot divide point coordinates by zero"
+            );
         }
         return new Point(
                 p.getX() / scalar,

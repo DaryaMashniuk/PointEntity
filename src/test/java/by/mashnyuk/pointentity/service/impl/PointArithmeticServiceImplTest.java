@@ -1,6 +1,7 @@
 package by.mashnyuk.pointentity.service.impl;
 
 import by.mashnyuk.pointentity.entity.Point;
+import by.mashnyuk.pointentity.exception.PointEntityException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -49,12 +50,12 @@ public class PointArithmeticServiceImplTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void testDivideByZero() {
+    public void testDivideByZero() throws PointEntityException {
         arithmeticService.divideByScalar(p1, 0);
     }
 
     @Test
-    public void testDivideByScalar() {
+    public void testDivideByScalar() throws PointEntityException {
         Point result = arithmeticService.divideByScalar(p1, 2.0);
         softAssert.assertEquals(result.getX(), 1.0, "X coordinate division failed");
         softAssert.assertEquals(result.getY(), 1.5, "Y coordinate division failed");

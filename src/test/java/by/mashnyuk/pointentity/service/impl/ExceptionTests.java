@@ -1,9 +1,7 @@
 package by.mashnyuk.pointentity.service.impl;
 
-import by.mashnyuk.pointentity.conroller.Facade;
 import by.mashnyuk.pointentity.entity.Point;
 import by.mashnyuk.pointentity.entity.PointsStorage;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;

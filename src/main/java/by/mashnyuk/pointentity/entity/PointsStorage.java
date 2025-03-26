@@ -12,7 +12,7 @@ public class PointsStorage {
     private static final Logger logger = LogManager.getLogger();
     private Set<Point> points = new HashSet<>();
 
-    public boolean addPoint(Point point) {
+    public boolean add(Point point) {
         return points.add(point);
     }
 
